@@ -1,0 +1,77 @@
+input, textarea, select, button {
+	font-family: Book Antiqua;
+}
+body {
+	font-family: Book Antiqua;
+    min-width: 800px;
+}
+
+div.message {
+	background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+    border-radius: 20px;
+    border: 1px solid rgb(221, 221, 221);
+    padding: 20px;
+    padding-bottom: 0px;
+    margin-bottom: 20px;
+}
+div.message-inv {
+    background-image: linear-gradient(to top, #ffffff, #e6e6e6);
+}
+
+.well-white {
+	background-color: #FFF;
+    padding: 20px;
+}
+
+.well-white-center {
+    background-color: #FFF;
+    padding: 20px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.profile {
+    border-radius: 14px;
+}
+
+.btn-toolbar .btn-group .btn:first-child {
+    border-radius: 14px 0px 0px 14px;
+}
+
+.btn-toolbar .btn-group .btn:last-child {
+    border-radius: 0px 14px 14px 0px;
+}
+
+input.like_a {
+    color: rgb(0, 136, 204);
+    border: 0px;
+    background: none;
+}
+
+input.like_a:hover, .like_a:focus {
+    color: rgb(0, 85, 128);
+    text-decoration: underline;
+        -moz-text-decoration-color: -moz-use-text-color;
+        -moz-text-decoration-line: underline;
+        -moz-text-decoration-style: solid;
+}
+
+input.like_a:focus {
+    outline: thin dotted rgb(51, 51, 51);
+        outline-width: thin;
+        outline-style: dotted;
+        outline-color: rgb(51, 51, 51);
+    outline-offset: -2px;
+}
+
+h4 {
+    margin-top: 3px;
+}
+
+textarea.const {
+    margin-right: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    height: 100px;
+    resize: none;
+}

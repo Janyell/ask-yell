@@ -1,0 +1,62 @@
+{%extends "base.html"%}
+{%block content%}   
+    {% if answers %}
+        {% for answer in answers %}
+            <div class="message"> 
+                <div class="row-fluid">
+                    <div class="offset3 row-fluid-center">
+                        <h3>{{ answer.question.title }}</h3>
+                    </div>
+                </div> 
+                <div class="row-fluid">                
+                    <div class="span3 row-fluid-center">
+                        <div class="well well-white-center pagination-centered">
+                            <h3 {% if answer.right_answer %}class="text-info"{% endif %}>{{ answer.rating }}</h3>  
+                            <form class="form-like">
+                                <div class="btn-toolbar">
+                                    <div class="btn-group">
+                                        <button type="submit" class="btn" {% if user.pk == answer.author.pk %}disabled{% endif %}><i class="icon-thumbs-up"></i></button>
+                                        <button type="submit" class="btn" {% if user.pk == answer.author.pk %}disabled{% endif %}><i class="icon-thumbs-down"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="span9">
+                        <div class="well well-white">
+                            <p><a href="/author/{{ answer.author.pk }}" class="btn profile"><i class="icon-user"></i></a> <b>{{ answer.author.username }}</b> ({{ answer.author.rating }}) <font class="muted">{{ answer.rel_datetime }}</font></p> 
+                            <p style="word-wrap:break-word;">{{ answer.text }}</p>
+                            <nav>
+                                <a href="/question/{{ answer.question.pk }}/">Read question</a>
+                            </nav> 
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        {% endfor %}
+        <div class="pagination" align="center">
+            <span class="step-links">
+                <div class="btn-toolbar">
+                    <div class="btn-group">
+                        {% if answers.has_previous %}
+                            <a href="?page={{ answers.previous_page_number }}" class="btn profile">
+                        {% else %}
+                            <a class="btn profile" disabled>
+                        {% endif %}
+                        <i class="icon-hand-left"></i></a>
+                        <a class="btn profile">Page {{ answers.number }} of {{ answers.paginator.num_pages }}</a>
+                        {% if answers.has_next %}
+                            <a href="?page={{ answers.next_page_number }}" class="btn profile">
+                        {% else %}
+                            <a class="btn profile" disabled>
+                        {% endif %}
+                            <i class="icon-hand-right"></i></a>
+                    </div>
+                </div>
+            </span>
+        </div>
+        <br>
+    {% else %}
+        <center><h4>No answers yet.</h4></center>
+    {% endif %}
+{%endblock%}

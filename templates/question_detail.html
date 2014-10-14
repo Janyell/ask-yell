@@ -1,0 +1,103 @@
+{%extends "base.html"%}
+{%block content%}   
+    {% if question %}
+        <div class="message"> 
+            <div class="row-fluid">                
+                <div class="span3 row-fluid-center">
+                    <div class="well well-white-center pagination-centered">
+                        <h3>{{ question.rating }}</h3>  
+                        <form class="form-like">
+                            <div class="btn-toolbar">
+                                <div class="btn-group">
+                                    <button type="submit" class="btn" {% if not user.is_authenticated or user.pk == question.author.pk %}disabled{% endif %}><i class="icon-thumbs-up"></i></button>
+                                    <button type="submit" class="btn" {% if not user.is_authenticated or user.pk == question.author.pk %}disabled{% endif %}><i class="icon-thumbs-down"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="span9">
+                    <div class="well well-white">
+                        <h3 style="margin-top: -5px;">{{ question.title }}</h3>
+                        <p><a href="/author/{{ question.author.pk }}" class="btn profile"><i class="icon-user"></i></a> <b>{{ question.author.username }}</b> ({{ question.author.rating }}) <font class="muted">{{ question.rel_datetime }}</font></p>
+                        <p style="word-wrap:break-word;">{{ question.text }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="offset1">
+            {% for answer in answers %}
+                <div class="message">  
+                    <div class="row-fluid">                
+                        <div class="span3 row-fluid-center">
+                            <div class="well well-white-center pagination-centered">
+                                <h3 {% if answer.right_answer %}class="text-info"{% endif %}>{{ answer.rating }}</h3>  
+                                <form class="form-like">
+                                    <div class="btn-toolbar">
+                                        <div class="btn-group">
+                                            <button type="submit" class="btn" {% if not user.is_authenticated or user.pk == answer.author.pk %}disabled{% endif %}><i class="icon-thumbs-up"></i></button>
+                                            <button type="submit" class="btn" {% if not user.is_authenticated or user.pk == answer.author.pk %}disabled{% endif %}><i class="icon-thumbs-down"></i></button>
+                                        </div>
+                                    </div>
+                                </form>
+                                {% if user.pk == question.author.pk %}
+                                    <form action="/right-answer/{{ answer.pk }}/" method="post">
+                                        <button type="submit" class="btn profile"><i class="icon-check"></i></button>
+                                    </form>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="span9">
+                            <div class="well well-white">
+                               <p><a href="/author/{{ answer.author.pk }}" class="btn profile"><i class="icon-user"></i></a> <b>{{ answer.author.username }}</b> ({{ answer.author.rating }}) <font class="muted">{{ answer.rel_datetime }}</font></p> 
+                               <p style="word-wrap:break-word;">{{ answer.text }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            {% endfor %}
+            <div class="pagination" align="center">
+                <span class="step-links">
+                    <div class="btn-toolbar">
+                        <div class="btn-group">
+                            {% if answers.has_previous %}
+                                <a href="?page={{ answers.previous_page_number }}" class="btn profile">
+                            {% else %}
+                                <a class="btn profile" disabled>
+                            {% endif %}
+                            <i class="icon-hand-left"></i></a>
+                            <a class="btn profile">Page {{ answers.number }} of {{ answers.paginator.num_pages }}</a>
+                            {% if answers.has_next %}
+                                <a href="?page={{ answers.next_page_number }}" class="btn profile">
+                            {% else %}
+                                <a class="btn profile" disabled>
+                            {% endif %}
+                                <i class="icon-hand-right"></i></a>
+                        </div>
+                    </div>
+                </span>
+            </div>
+        </div>
+        <br>
+        {% if user.is_authenticated %}
+            <a name="answer"></a>
+            <form method="POST" active="/question/{{ question.pk }}/">
+                {% if answer_form.errors %}
+                    <div align="center"class="row-fluid">
+                        <font class="text-error"><strong>Invalid answer! Check lenght, please.</strong></font>
+                    </div>    
+                    <br>
+                {% endif %}
+                <div class="message">
+                    <label for="answer"><h3>Your answer:</h3>
+                    <div style="margin-bottom: 20px; margin-right: 15px;">
+                        {{ answer_form.text }}
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success" style="margin-left: 20px; margin-bottom: 20px;">
+                    <strong>Answer!</strong>
+                </button>
+            </form>
+        {% endif %}
+    {% endif %}
+{%endblock%}
