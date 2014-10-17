@@ -21,7 +21,7 @@
                         <div class="well well-white"> 
                             <h3 style="margin-top: -5px;">{{ question.title }}</h3>
                             <p style="word-wrap:break-word;">{{ question.text }}</p>
-                            <p><a href="/author/{{ question.author.pk }}" class="btn profile"><i class="icon-user"></i></a> <b>{{ question.author.username }}</b> ({{ question.author.rating }}) <font class="muted">{{ question.rel_datetime }}</font></p>
+                            <p><a href="/author/{{ question.author.pk }}/" class="btn profile"><i class="icon-user"></i></a> <b>{{ question.author.username }}</b> ({{ question.author.rating }}) <font class="muted">{{ question.rel_datetime }}</font></p>
                             <nav>
                                 <a href="/question/{{ question.pk }}/">Read answers</a> {% if user.is_authenticated %} | 
                                 <a href="/question/{{ question.pk }}/#answer">Answer</a> {% else %} |

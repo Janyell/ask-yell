@@ -24,7 +24,7 @@
                     </div>
                     <div class="span9">
                         <div class="well well-white">
-                            <p><a href="/author/{{ answer.author.pk }}" class="btn profile"><i class="icon-user"></i></a> <b>{{ answer.author.username }}</b> ({{ answer.author.rating }}) <font class="muted">{{ answer.rel_datetime }}</font></p> 
+                            <p><a href="/author/{{ answer.author.pk }}/" class="btn profile"><i class="icon-user"></i></a> <b>{{ answer.author.username }}</b> ({{ answer.author.rating }}) <font class="muted">{{ answer.rel_datetime }}</font></p> 
                             <p style="word-wrap:break-word;">{{ answer.text }}</p>
                             <nav>
                                 <a href="/question/{{ answer.question.pk }}/">Read question</a>

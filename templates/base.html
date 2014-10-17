@@ -4,8 +4,8 @@
         <meta charset = "UTF-8">
         <title>Ask Yell</title>
         <!-- Bootstrap -->
-        <link href="/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
-        <link href="/bootstrap/my.css" rel="stylesheet" media="screen">
+        <link href="{{STATIC_URL}}bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
+        <link href="{{STATIC_URL}}bootstrap/my.css" rel="stylesheet" media="screen">
     </head>
     <body {%if user.is_authenticated and question_form.errors %} onload = 'document.getElementById("ask_form").onclick()'{% endif %}>
         <div class="container-fluid">
@@ -19,7 +19,7 @@
                     {% if user.is_authenticated %}
                         <div class="span6 pagination-centered">
                             <br>
-                            <a href="/author/{{ user.pk }}"><i class="icon-user"></i> {{ user.username }}</a>
+                            <a href="/author/{{ user.pk }}/"><i class="icon-user"></i> {{ user.username }}</a>
                         </div>
                         <div class="span6 pagination-centered">
                             <br>
@@ -41,10 +41,10 @@
                 <div class="span9">
                     <ul class="nav nav-tabs">
                         <li {% if request.path == '/' or request.path == '/new/' %}class="active"{% endif %}>
-                            <a href="/new/"data-toggle="tab">New</a>
+                            <a href="/new/">New</a>
                         </li>
                         <li style="display: inline-block;"{% ifequal request.path '/popular/' %}class="active"{% endifequal %}>
-                            <a href="/popular/" data-toggle="tab">Popular</a>
+                            <a href="/popular/">Popular</a>
                         </li>
                         <p></p>
                         {% if user.is_authenticated and not error404 %}
@@ -66,7 +66,7 @@
                     {% if user.is_authenticated %}
                         {% if author %}
                             <center>
-                                <h4><a href="/author/{{ author.pk }}" class="btn profile"><i class="icon-user"></i></a> {{ author.username }}</h4>
+                                <h4><a href="/author/{{ author.pk }}/" class="btn profile"><i class="icon-user"></i></a> {{ author.username }}</h4>
                                 <b>Rating:</b> {{ author.rating }}
                             <br>
                             <br>
@@ -82,7 +82,7 @@
                         <center><h4>Last registered authors</h4></center>
                         <ul class="unstyled">
                             {% for author in last_authors%}
-                                <li><a href="/author/{{ author.pk }}"><i class="icon-user"></i> {{ author.username }}</a> ({{ author.rating }})</li>
+                                <li><a href="/author/{{ author.pk }}/"><i class="icon-user"></i> {{ author.username }}</a> ({{ author.rating }})</li>
                             {% endfor %}
                         </ul>
                     {% endif %}
@@ -127,7 +127,7 @@
                         <div class="span9 offset3">
                             <input type = "submit" class="btn btn-success" style="font-weight:bold;" value="ASK!" />
                             <div class="pull-right">
-                                <input type="reset" class="btn" data-dismiss="modal" aria-hidden="true" value="Cansel" />
+                                <input type="reset" class="btn" data-dismiss="modal" aria-hidden="true" value="Cancel" />
                             </div>
                         </div>    
                     </div>
@@ -136,7 +136,7 @@
             <div class="modal-footer">
             </div>
         </div>
-        <script src="/jquery-latest.js"></script>
-        <script src="/bootstrap/js/bootstrap.js"></script>
+        <script src="{{STATIC_URL}}jquery-latest.js"></script>
+        <script src="{{STATIC_URL}}bootstrap/js/bootstrap.js"></script>
     </body>
     </html>
